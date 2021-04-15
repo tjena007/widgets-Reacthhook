@@ -2,6 +2,7 @@ import React,{ useState, useEffect, useRef } from 'react';
 
 const Dropdown = ({options, selected, onSelectedChange}) => {
   const [open,setOpen] = useState(false);
+  const [color,setColor] = useState('');
   const ref = useRef();
 
   useEffect(() => {
@@ -23,8 +24,15 @@ const Dropdown = ({options, selected, onSelectedChange}) => {
           return null;
       }
       else{
+        //   setColor(option.color);
+        //   console.log(color);
         return(
-            <div key={option.value} onClick={() => onSelectedChange(option)} className="item">
+            <div key={option.value} onClick={() => 
+            {
+                onSelectedChange(option);
+                setColor(option.color);
+            }
+            } className="item">
                 {option.label}
             </div>
         )
@@ -43,6 +51,7 @@ const Dropdown = ({options, selected, onSelectedChange}) => {
                     </div>
                 </div>
             </div>
+            <div style={{color: `${color}`}}> Text color change</div>
         </div>
       </div>
   )
